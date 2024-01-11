@@ -11,6 +11,8 @@ class ImplicitAnimationChallengeScreen extends StatefulWidget {
 class _ImplicitAnimationChallengeScreenState
     extends State<ImplicitAnimationChallengeScreen> {
   bool reachedEnd = false;
+  var start = Alignment.centerLeft;
+  var end = Alignment.centerRight;
 
   @override
   Widget build(BuildContext context) {
@@ -32,28 +34,37 @@ class _ImplicitAnimationChallengeScreenState
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(reachedEnd ? 0 : 150),
                 ),
-                child: AnimatedAlign(
+                child: TweenAnimationBuilder(
+                  tween: AlignmentTween(begin: start, end: end),
                   duration: const Duration(seconds: 1),
-                  alignment:
-                      reachedEnd ? Alignment.centerLeft : Alignment.centerRight,
-                  child: Container(
-                    width: size.width * 0.04,
-                    height: size.width * 0.6,
-                    color: reachedEnd ? Colors.white : Colors.black,
+                  builder: (context, value, child) => Align(
+                    alignment: value,
+                    child: Container(
+                      width: size.width * 0.04,
+                      height: size.width * 0.6,
+                      color: reachedEnd ? Colors.white : Colors.black,
+                    ),
                   ),
+                  onEnd: () {
+                    setState(() {
+                      reachedEnd = !reachedEnd;
+                      if (end == Alignment.centerLeft) {
+                        end = Alignment.centerRight;
+                      } else {
+                        end = Alignment.centerLeft;
+                      }
+                      if (start == Alignment.centerRight) {
+                        start = Alignment.centerLeft;
+                      } else {
+                        start = Alignment.centerRight;
+                      }
+                    });
+                  },
                 ),
               ),
             ),
             const SizedBox(
               height: 50,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  reachedEnd = !reachedEnd;
-                });
-              },
-              child: const Text("Go"),
             ),
           ],
         ),
