@@ -3,6 +3,7 @@ import 'package:flutter_animations_masterclass/screens/explicit_animation_challe
 import 'package:flutter_animations_masterclass/screens/explicit_animations_screen.dart';
 import 'package:flutter_animations_masterclass/screens/implicit_animation_challenge_screen.dart';
 import 'package:flutter_animations_masterclass/screens/implicit_animations_screen.dart';
+import 'package:flutter_animations_masterclass/screens/music_player_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -58,6 +59,16 @@ class MenuScreen extends StatelessWidget {
               const ExplicitAnimationChallengeScreen(),
             ),
             child: const Text("Explicit Animations Challenge"),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+            onPressed: () => _goToPage(
+              context,
+              const MusicPlayerScreen(),
+            ),
+            child: const Text("Music Player Screen"),
           ),
         ],
       )),
