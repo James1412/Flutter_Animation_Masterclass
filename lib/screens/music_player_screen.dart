@@ -40,10 +40,13 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
   void _onTap(int index) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => MusicPlayerDetailScreen(
-          index: index,
-        ),
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return FadeTransition(
+            opacity: animation,
+            child: MusicPlayerDetailScreen(index: index),
+          );
+        },
       ),
     );
   }

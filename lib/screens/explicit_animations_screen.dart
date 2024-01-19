@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 class ExplicitAnimationsScreen extends StatefulWidget {
   const ExplicitAnimationsScreen({super.key});
@@ -13,16 +10,10 @@ class ExplicitAnimationsScreen extends StatefulWidget {
 
 class _ExplicitAnimationsScreenState extends State<ExplicitAnimationsScreen>
     with SingleTickerProviderStateMixin {
-  @override
   late final AnimationController _animationController = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 2),
   );
-
-  late final Animation<Color?> _color = ColorTween(
-    begin: Colors.amber,
-    end: Colors.red,
-  ).animate(_animationController);
 
   late final Animation<Decoration> _decoration = DecorationTween(
     begin: BoxDecoration(
